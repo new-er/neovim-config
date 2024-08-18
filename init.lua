@@ -74,9 +74,46 @@ vim.opt.scrolloff = 10
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
+-- project keymaps
 vim.keymap.set('n', '<leader>pe', vim.cmd.Ex, { desc = 'open' })
 vim.keymap.set('n', '<leader>ps', ':w<CR>', { desc = 'save' })
 vim.keymap.set('n', '<leader>pq', ':q<CR>', { desc = 'quit' })
+
+-- Haproon key maps
+vim.keymap.set('n', '<leader>ha', function()
+  require('harpoon.mark').add_file()
+end, { desc = '[h]arpoon [a]dd file' })
+vim.keymap.set('n', '<leader>ho', function()
+  require('harpoon.ui').toggle_quick_menu()
+end, { desc = '[h]arpoon [q]uick menu' })
+
+vim.keymap.set('n', '<leader>h1', function()
+  require('harpoon.ui').nav_file(1)
+end, { desc = '[h]arpoon file [1]' })
+vim.keymap.set('n', '<leader>h2', function()
+  require('harpoon.ui').nav_file(2)
+end, { desc = '[h]arpoon file [2]' })
+vim.keymap.set('n', '<leader>h3', function()
+  require('harpoon.ui').nav_file(3)
+end, { desc = '[h]arpoon file [3]' })
+vim.keymap.set('n', '<leader>h4', function()
+  require('harpoon.ui').nav_file(4)
+end, { desc = '[h]arpoon file [4]' })
+vim.keymap.set('n', '<leader>h5', function()
+  require('harpoon.ui').nav_file(5)
+end, { desc = '[h]arpoon file [5]' })
+vim.keymap.set('n', '<leader>h6', function()
+  require('harpoon.ui').nav_file(6)
+end, { desc = '[h]arpoon file [6]' })
+vim.keymap.set('n', '<leader>h7', function()
+  require('harpoon.ui').nav_file(7)
+end, { desc = '[h]arpoon file [7]' })
+vim.keymap.set('n', '<leader>h8', function()
+  require('harpoon.ui').nav_file(8)
+end, { desc = '[h]arpoon file [8]' })
+vim.keymap.set('n', '<leader>h9', function()
+  require('harpoon.ui').nav_file(9)
+end, { desc = '[h]arpoon file [9]' })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
@@ -148,6 +185,7 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  'ThePrimeagen/harpoon',
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
@@ -203,7 +241,7 @@ require('lazy').setup({
         { '<leader>s', group = '[S]earch' },
         { '<leader>w', group = '[W]orkspace' },
         { '<leader>t', group = '[T]oggle' },
-        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+        { '<leader>h', group = '[H]arpoon' },
         { '<leader>p', group = '[P]roject' },
       }
     end,
@@ -295,7 +333,18 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
-      vim.keymap.set('n', '<leader>st', builtin.git_files, { desc = '[Search] gi[t]' })
+
+      function Live_grep_git_dir()
+        local git_dir = vim.fn.system(string.format('git -C %s rev-parse --show-toplevel', vim.fn.expand '%:p:h'))
+        git_dir = string.gsub(git_dir, '\n', '') -- remove newline character from git_dir
+        local opts = {
+          cwd = git_dir,
+        }
+        require('telescope.builtin').live_grep(opts)
+      end
+
+      vim.keymap.set('n', '<leader>stg', ':lua Live_grep_git_dir()<CR>', { desc = '[S]earch gi[t] [g]rep' })
+      vim.keymap.set('n', '<leader>stf', builtin.git_files, { desc = '[S]earch gi[t] [f]iles' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
@@ -790,6 +839,7 @@ require('lazy').setup({
       --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     end,
   },
+  'nvim-treesitter/playground',
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
