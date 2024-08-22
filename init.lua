@@ -199,6 +199,12 @@ require('lazy').setup({
   'mbbill/undotree',
   'tpope/vim-fugitive',
 
+  -- lsp-zero
+  { 'VonHeikemen/lsp-zero.nvim', branch = 'v4.x' },
+  { 'neovim/nvim-lspconfig' },
+  { 'hrsh7th/cmp-nvim-lsp' },
+  { 'hrsh7th/nvim-cmp' },
+
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
   -- keys can be used to configure plugin behavior/loading/etc.
