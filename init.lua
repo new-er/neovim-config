@@ -80,6 +80,10 @@ vim.opt.scrolloff = 10
 -- git keymaps
 vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = 'toggle git screen' })
 
+-- buffer keymaps
+vim.keymap.set('n', '<CTRL>bp', ':bp<CR>', { desc = '[b]uffer [p]revious' })
+vim.keymap.set('n', '<CTRL>bn', ':bn<CR>', { desc = '[b]uffer [n]ext' })
+
 -- project keymaps
 vim.keymap.set('n', '<leader>pe', vim.cmd.Ex, { desc = 'open' })
 vim.keymap.set('n', '<leader>ps', ':w<CR>', { desc = 'save' })
@@ -198,6 +202,8 @@ require('lazy').setup({
   'ThePrimeagen/harpoon',
   'mbbill/undotree',
   'tpope/vim-fugitive',
+  'mfussenegger/nvim-dap',
+  { 'rcarriga/nvim-dap-ui', dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' } },
 
   -- lsp-zero
   { 'VonHeikemen/lsp-zero.nvim', branch = 'v4.x' },
@@ -261,6 +267,8 @@ require('lazy').setup({
         { '<leader>t', group = '[T]oggle' },
         { '<leader>h', group = '[H]arpoon' },
         { '<leader>p', group = '[P]roject' },
+        { '<leader>l', group = '[L]SP' },
+        { '<leader>g', group = '[G]it' },
       }
     end,
   },
@@ -306,7 +314,7 @@ require('lazy').setup({
       --
       -- After running this command, a window will open up and you're able to
       -- type in the prompt window. You'll see a list of `help_tags` options and
-      -- a corresponding preview of the help.
+      --a corresponding preview of the help.
       --
       -- Two important keymaps to use while in Telescope are:
       --  - Insert mode: <c-/>
@@ -476,23 +484,23 @@ require('lazy').setup({
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
-          map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+          map('gt', require('telescope.builtin').lsp_type_definitions, '[T]ype Definition')
 
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
-          map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+          map('<leader>ld', require('telescope.builtin').lsp_document_symbols, '[L]SP [D]ocument Symbols')
 
           -- Fuzzy find all the symbols in your current workspace.
           --  Similar to document symbols, except searches over your entire project.
-          map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+          map('<leader>lw', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[L]SP [W]orkspace Symbols')
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
-          map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+          map('<leader>lr', vim.lsp.buf.rename, '[L]SP rename')
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
-          map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+          map('<leader>lc', vim.lsp.buf.code_action, '[L]SP [C]ode action')
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
@@ -557,7 +565,7 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         -- clangd = {},
-        -- gopls = {},
+        gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
