@@ -32,6 +32,9 @@ vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
 end)
 
+-- Enable line numbers in netrv
+vim.g.netrw_bufsettings = 'noma nomod nu nobl nowrap rnu'
+
 -- Enable break indent
 vim.opt.breakindent = true
 
@@ -74,6 +77,9 @@ vim.opt.scrolloff = 10
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
+-- git keymaps
+vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = 'toggle git screen' })
+
 -- project keymaps
 vim.keymap.set('n', '<leader>pe', vim.cmd.Ex, { desc = 'open' })
 vim.keymap.set('n', '<leader>ps', ':w<CR>', { desc = 'save' })
@@ -115,10 +121,12 @@ vim.keymap.set('n', '<leader>h9', function()
   require('harpoon.ui').nav_file(9)
 end, { desc = '[h]arpoon file [9]' })
 
-vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
+-- undotree
+vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = 'toggle undo tree view' })
 vim.g.undotree_DiffCommand = 'FC'
+
 -- Clear highlights on search when pressing <Esc> in normal mode
---  See `:help hlsearch`
+--  See `:help lsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
@@ -189,6 +197,7 @@ require('lazy').setup({
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'ThePrimeagen/harpoon',
   'mbbill/undotree',
+  'tpope/vim-fugitive',
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
