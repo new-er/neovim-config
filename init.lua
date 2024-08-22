@@ -204,8 +204,20 @@ require('lazy').setup({
   'tpope/vim-fugitive',
 
   -- debugger
-  'mfussenegger/nvim-dap',
+  {
+    'mfussenegger/nvim-dap',
+  },
   { 'rcarriga/nvim-dap-ui', dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' } },
+  -- go debugger
+  {
+    'leoluz/nvim-dap-go',
+    config = function()
+      require('dap-go').setup()
+    end,
+    dependencies = {
+      'mfussenegger/nvim-dap',
+    },
+  },
 
   -- lsp-zero
   { 'VonHeikemen/lsp-zero.nvim', branch = 'v4.x' },
