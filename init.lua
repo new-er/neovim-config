@@ -81,8 +81,8 @@ vim.opt.scrolloff = 10
 vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = '[g]it [s]creen' })
 vim.keymap.set('n', '<leader>ga.', ':Git add .<CR>', { desc = '[g]it [a]dd [.]' })
 vim.keymap.set('n', '<leader>gc', ':Git commit -m ""', { desc = '[g]it [c]ommit' })
-vim.keymap.set('n', '<leader>gp', ':Git push', { desc = '[g]it [p]ush' })
-vim.keymap.set('n', '<leader>gl', ':Git pull', { desc = '[g]it pu[l]' })
+vim.keymap.set('n', '<leader>gp', ':Git push<CR>', { desc = '[g]it [p]ush' })
+vim.keymap.set('n', '<leader>gl', ':Git pull<CR>', { desc = '[g]it pu[l]' })
 
 -- buffer keymaps
 vim.keymap.set('n', '<CTRL>bp', ':bp<CR>', { desc = '[b]uffer [p]revious' })
