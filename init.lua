@@ -202,6 +202,8 @@ require('lazy').setup({
   'ThePrimeagen/harpoon',
   'mbbill/undotree',
   'tpope/vim-fugitive',
+
+  -- debugger
   'mfussenegger/nvim-dap',
   { 'rcarriga/nvim-dap-ui', dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' } },
 
@@ -210,6 +212,22 @@ require('lazy').setup({
   { 'neovim/nvim-lspconfig' },
   { 'hrsh7th/cmp-nvim-lsp' },
   { 'hrsh7th/nvim-cmp' },
+  {
+    'petertriho/nvim-scrollbar',
+    config = function()
+      require('scrollbar').setup()
+    end,
+    event = 'BufReadPost',
+  },
+  {
+    'kevinhwang91/nvim-hlslens',
+    config = function()
+      -- require('hlslens').setup() is not required
+      require('scrollbar.handlers.search').setup {
+        -- hlslens config overrides
+      }
+    end,
+  },
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
@@ -234,6 +252,10 @@ require('lazy').setup({
         changedelete = { text = '~' },
       },
     },
+    config = function()
+      require('gitsigns').setup()
+      require('scrollbar.handlers.gitsigns').setup()
+    end,
   },
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
