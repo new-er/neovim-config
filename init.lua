@@ -78,7 +78,11 @@ vim.opt.scrolloff = 10
 --  See `:help vim.keymap.set()`
 
 -- git keymaps
-vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = 'toggle git screen' })
+vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = '[g]it [s]creen' })
+vim.keymap.set('n', '<leader>ga.', ':Git add .<CR>', { desc = '[g]it [a]dd [.]' })
+vim.keymap.set('n', '<leader>gc', ':Git commit -m ""', { desc = '[g]it [c]ommit' })
+vim.keymap.set('n', '<leader>gp', ':Git push', { desc = '[g]it [p]ush' })
+vim.keymap.set('n', '<leader>gl', ':Git pull', { desc = '[g]it pu[l]' })
 
 -- buffer keymaps
 vim.keymap.set('n', '<CTRL>bp', ':bp<CR>', { desc = '[b]uffer [p]revious' })
@@ -293,16 +297,17 @@ require('lazy').setup({
 
       -- Document existing key chains
       require('which-key').add {
-        { '<leader>c', group = '[C]ode' },
-        { '<leader>d', group = '[D]ocument' },
-        { '<leader>r', group = '[R]ename' },
-        { '<leader>s', group = '[S]earch' },
-        { '<leader>w', group = '[W]orkspace' },
-        { '<leader>t', group = '[T]oggle' },
-        { '<leader>h', group = '[H]arpoon' },
-        { '<leader>p', group = '[P]roject' },
-        { '<leader>l', group = '[L]SP' },
-        { '<leader>g', group = '[G]it' },
+        { '<leader>c', group = '[c]ode' },
+        { '<leader>d', group = '[d]ocument' },
+        { '<leader>r', group = '[r]ename' },
+        { '<leader>s', group = '[s]earch' },
+        { '<leader>w', group = '[w]orkspace' },
+        { '<leader>t', group = '[t]oggle' },
+        { '<leader>h', group = '[h]arpoon' },
+        { '<leader>p', group = '[g]roject' },
+        { '<leader>l', group = '[g]SP' },
+        { '<leader>g', group = '[g]it' },
+        { '<leader>ga', group = '[g]it [a]dd' },
       }
     end,
   },
