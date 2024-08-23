@@ -1,5 +1,6 @@
 require "nvchad.options"
 
-dofile('./lua/options_editor.lua')
-dofile('./lua/options_nvim_tree.lua')
-dofile('./lua/options_git.lua')
+require('options_editor')
+require('options_nvim_tree')
+require('options_git')
+require('options_debugger')

@@ -5,14 +5,16 @@ local function git_commit()
   vim.cmd(command)
 end
 
-vim.keymap.set("n", "<leader>ga.", ":!git add .<CR>", { desc = "[.]" })
-vim.keymap.set("n", "<leader>gc", function()
+local map = vim.keymap.set
+
+map("n", "<leader>ga.", ":!git add .<CR>", { desc = "[.]" })
+map("n", "<leader>gc", function()
   git_commit()
 end, { desc = "[c]ommit" })
-vim.keymap.set("n", "<leader>gps", ":!git push<CR>", { desc = "[p]u[s]h" })
-vim.keymap.set("n", "<leader>gpl", ":!git pull<CR>", { desc = "[p]u[l]l" })
+map("n", "<leader>gps", ":!git push<CR>", { desc = "[p]u[s]h" })
+map("n", "<leader>gpl", ":!git pull<CR>", { desc = "[p]u[l]l" })
 
-vim.keymap.set("n", "<leader>gacp", function()
+map("n", "<leader>gacp", function()
   vim.cmd ":!git add ."
   git_commit()
   vim.cmd ":!git push"
