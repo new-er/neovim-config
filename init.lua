@@ -106,6 +106,13 @@ vim.keymap.set('n', '<leader>gc', function()
   local command = string.format('Git commit -m "%s"', message)
   vim.cmd(command)
 end, { desc = '[c]ommit' })
+vim.keymap.set('n', '<leader>gacp', function()
+  vim.cmd('Git add .')
+  local message = vim.fn.input('message: ', '')
+  local command = string.format('Git commit -m "%s"', message)
+  vim.cmd(command)
+  vim.cmd('Git push')
+end, { desc = '[p]ush' })
 
 -- buffer keymaps
 vim.keymap.set('n', '<CTRL>bp', ':bp<CR>', { desc = '[p]revious' })
