@@ -1,3 +1,10 @@
+local api = require "nvim-tree.api"
+local Event = api.events.Event
+local currentSize = 30
+api.events.subscribe(Event.Resize, function(size)
+currentSize=size
+end)
+
 return {
   {
     "stevearc/conform.nvim",
@@ -20,7 +27,8 @@ return {
     dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
     config = function()
       require("dapui").setup()
-      local dap, dapui = require "dap", require "dapui"
+      local dap, dapui, nvimTree = require "dap", require "dapui", require "nvim-tree.view"
+
       dap.listeners.before.attach.dapui_config = function()
         dapui.open()
       end
@@ -29,15 +37,18 @@ return {
       end
       dap.listeners.before.event_terminated.dapui_config = function()
         dapui.close()
+        vim.cmd(":NvimTreeResize ".. currentSize)
       end
       dap.listeners.before.event_exited.dapui_config = function()
         dapui.close()
+        vim.cmd (":NvimTreeResize "..currentSize)
       end
     end,
   },
   -- debugger: GO
   {
     "leoluz/nvim-dap-go",
+    ft = { "go", "gomod" },
     config = function()
       require("dap-go").setup()
     end,

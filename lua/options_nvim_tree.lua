@@ -4,4 +4,6 @@ local function open_nvim_tree()
 end
 vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
 
-require('nvim-tree').setup({view = {relativenumber = true, number = true}})
+require('nvim-tree').setup({view = {relativenumber = true, number = true,}})
+
+
