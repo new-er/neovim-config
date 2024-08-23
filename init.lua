@@ -6,6 +6,9 @@ vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
+-- Disable netrw at the start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -76,6 +79,13 @@ vim.opt.scrolloff = 10
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
+
+-- nvim-tree
+vim.keymap.set('n', '<leader>tt', ':NvimTreeToggle<CR>', { desc = 'nvim-[t]ree [t]oggle' })
+
+-- debugger keymaps
+vim.keymap.set('n', '<leader>db', vim.cmd.Git, { desc = '[d]ebugger [b]reakpoint' })
+vim.keymap.set('n', '<leader>dc', vim.cmd.Git, { desc = '[d]ebugger [c]ontinue' })
 
 -- git keymaps
 vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = '[g]it [s]creen' })
@@ -206,6 +216,17 @@ require('lazy').setup({
   'ThePrimeagen/harpoon',
   'mbbill/undotree',
   'tpope/vim-fugitive',
+  {
+    'nvim-tree/nvim-tree.lua',
+    version = '*',
+    lazy = false,
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+    },
+    config = function()
+      require('nvim-tree').setup { view = { relativenumber = true, number = true } }
+    end,
+  },
 
   -- debugger
   {
@@ -308,6 +329,7 @@ require('lazy').setup({
         { '<leader>l', group = '[g]SP' },
         { '<leader>g', group = '[g]it' },
         { '<leader>ga', group = '[g]it [a]dd' },
+        { '<leader>t', group = 'nvim-[t]ree' },
       }
     end,
   },
@@ -579,9 +601,9 @@ require('lazy').setup({
           --
           -- This may be unwanted, since they displace some of your code
           if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
-            map('<leader>th', function()
+            map('<leader>lh', function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
-            end, '[T]oggle Inlay [H]ints')
+            end, '[l]sp toggle inlay [h]ints')
           end
         end,
       })
