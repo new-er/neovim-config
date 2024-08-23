@@ -84,19 +84,33 @@ vim.opt.scrolloff = 10
 vim.keymap.set('n', '<leader>tt', ':NvimTreeToggle<CR>', { desc = 'nvim-[t]ree [t]oggle' })
 
 -- debugger keymaps
-vim.keymap.set('n', '<leader>db', vim.cmd.Git, { desc = '[d]ebugger [b]reakpoint' })
-vim.keymap.set('n', '<leader>dc', vim.cmd.Git, { desc = '[d]ebugger [c]ontinue' })
+vim.keymap.set('n', '<leader>du', ':lua require"dapui".toggle()<CR>', { desc = '[u]i' })
+vim.keymap.set('n', '<leader>db', ':lua require"dap".toggle_breakpoint()<CR>', { desc = '[b]reakpoint' })
+vim.keymap.set('n', '<leader>dsc', ':lua require"dap".continue()<CR>', { desc = '[c]ontinue' })
+vim.keymap.set('n', '<leader>dsp', ':lua require"dapui".pause()<CR>', { desc = ' [p]ause' })
+vim.keymap.set('n', '<leader>dsi', ':lua require"dap".step_into()<CR>', { desc = '[i]nto' })
+vim.keymap.set('n', '<leader>dso', ':lua require"dap".step_over()<CR>', { desc = '[o]ver' })
+vim.keymap.set('n', '<leader>dst', ':lua require"dap".step_out()<CR>', { desc = 'ou[t]' })
+vim.keymap.set('n', '<leader>dsrc', ':lua require"dap".reverse_continue()<CR>', { desc = '[c]ontinue' })
+vim.keymap.set('n', '<leader>dsro', ':lua require"dap".step_back()<CR>', { desc = '[o]ver' })
+vim.keymap.set('n', '<leader>dtu', ':lua require"dapui".up()<CR>', { desc = '[u]p' })
+vim.keymap.set('n', '<leader>dtd', ':lua require"dapui".pause()<CR>', { desc = '[d]own' })
 
 -- git keymaps
-vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = '[g]it [s]creen' })
-vim.keymap.set('n', '<leader>ga.', ':Git add .<CR>', { desc = '[g]it [a]dd [.]' })
-vim.keymap.set('n', '<leader>gc', ':Git commit -m ""', { desc = '[g]it [c]ommit' })
-vim.keymap.set('n', '<leader>gp', ':Git push<CR>', { desc = '[g]it [p]ush' })
-vim.keymap.set('n', '<leader>gl', ':Git pull<CR>', { desc = '[g]it pu[l]' })
+vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = '[s]creen' })
+vim.keymap.set('n', '<leader>ga.', ':Git add .<CR>', { desc = '[.]' })
+vim.keymap.set('n', '<leader>gp', ':Git push<CR>', { desc = '[p]ush' })
+vim.keymap.set('n', '<leader>gl', ':Git pull<CR>', { desc = 'pu[l]' })
+vim.keymap.set('n', '<leader>gc', function()
+  -- Start the Git commit command
+  vim.cmd 'Git commit -m ""'
+  -- Move the cursor back into the quotes
+  vim.api.nvim_feedkeys('i', 'n', true)
+end, { desc = '[c]ommit' })
 
 -- buffer keymaps
-vim.keymap.set('n', '<CTRL>bp', ':bp<CR>', { desc = '[b]uffer [p]revious' })
-vim.keymap.set('n', '<CTRL>bn', ':bn<CR>', { desc = '[b]uffer [n]ext' })
+vim.keymap.set('n', '<CTRL>bp', ':bp<CR>', { desc = '[p]revious' })
+vim.keymap.set('n', '<CTRL>bn', ':bn<CR>', { desc = '[n]ext' })
 
 -- project keymaps
 vim.keymap.set('n', '<leader>pe', vim.cmd.Ex, { desc = 'open' })
@@ -106,41 +120,41 @@ vim.keymap.set('n', '<leader>pq', ':q<CR>', { desc = 'quit' })
 -- Haproon key maps
 vim.keymap.set('n', '<leader>ha', function()
   require('harpoon.mark').add_file()
-end, { desc = '[h]arpoon [a]dd file' })
-vim.keymap.set('n', '<leader>ho', function()
+end, { desc = '[a]dd' })
+vim.keymap.set('n', '<leader>hm', function()
   require('harpoon.ui').toggle_quick_menu()
-end, { desc = '[h]arpoon [q]uick menu' })
+end, { desc = '[m]enu' })
 
 vim.keymap.set('n', '<leader>h1', function()
   require('harpoon.ui').nav_file(1)
-end, { desc = '[h]arpoon file [1]' })
+end, { desc = '[1]' })
 vim.keymap.set('n', '<leader>h2', function()
   require('harpoon.ui').nav_file(2)
-end, { desc = '[h]arpoon file [2]' })
+end, { desc = '[2]' })
 vim.keymap.set('n', '<leader>h3', function()
   require('harpoon.ui').nav_file(3)
-end, { desc = '[h]arpoon file [3]' })
+end, { desc = '[3]' })
 vim.keymap.set('n', '<leader>h4', function()
   require('harpoon.ui').nav_file(4)
-end, { desc = '[h]arpoon file [4]' })
+end, { desc = '[4]' })
 vim.keymap.set('n', '<leader>h5', function()
   require('harpoon.ui').nav_file(5)
-end, { desc = '[h]arpoon file [5]' })
+end, { desc = '[5]' })
 vim.keymap.set('n', '<leader>h6', function()
   require('harpoon.ui').nav_file(6)
-end, { desc = '[h]arpoon file [6]' })
+end, { desc = '[6]' })
 vim.keymap.set('n', '<leader>h7', function()
   require('harpoon.ui').nav_file(7)
-end, { desc = '[h]arpoon file [7]' })
+end, { desc = '[7]' })
 vim.keymap.set('n', '<leader>h8', function()
   require('harpoon.ui').nav_file(8)
-end, { desc = '[h]arpoon file [8]' })
+end, { desc = '[8]' })
 vim.keymap.set('n', '<leader>h9', function()
   require('harpoon.ui').nav_file(9)
-end, { desc = '[h]arpoon file [9]' })
+end, { desc = '[9]' })
 
 -- undotree
-vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = 'toggle undo tree view' })
+vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = '[u]ndotree' })
 vim.g.undotree_DiffCommand = 'FC'
 
 -- Clear highlights on search when pressing <Esc> in normal mode
@@ -232,7 +246,26 @@ require('lazy').setup({
   {
     'mfussenegger/nvim-dap',
   },
-  { 'rcarriga/nvim-dap-ui', dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' } },
+  {
+    'rcarriga/nvim-dap-ui',
+    dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' },
+    config = function()
+      require('dapui').setup()
+      local dap, dapui = require 'dap', require 'dapui'
+      dap.listeners.before.attach.dapui_config = function()
+        dapui.open()
+      end
+      dap.listeners.before.launch.dapui_config = function()
+        dapui.open()
+      end
+      dap.listeners.before.event_terminated.dapui_config = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited.dapui_config = function()
+        dapui.close()
+      end
+    end,
+  },
   -- go debugger
   {
     'leoluz/nvim-dap-go',
@@ -320,13 +353,15 @@ require('lazy').setup({
       require('which-key').add {
         { '<leader>c', group = '[c]ode' },
         { '<leader>d', group = '[d]ebugger' },
+        { '<leader>ds', group = '[s]tep' },
+        { '<leader>dt', group = '[t]race' },
         { '<leader>r', group = '[r]ename' },
         { '<leader>s', group = '[s]earch' },
         { '<leader>w', group = '[w]orkspace' },
         { '<leader>t', group = '[t]oggle' },
         { '<leader>h', group = '[h]arpoon' },
-        { '<leader>p', group = '[g]roject' },
-        { '<leader>l', group = '[g]SP' },
+        { '<leader>p', group = '[p]roject' },
+        { '<leader>l', group = '[l]SP' },
         { '<leader>g', group = '[g]it' },
         { '<leader>ga', group = '[g]it [a]dd' },
         { '<leader>t', group = 'nvim-[t]ree' },
