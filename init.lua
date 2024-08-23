@@ -319,7 +319,7 @@ require('lazy').setup({
       -- Document existing key chains
       require('which-key').add {
         { '<leader>c', group = '[c]ode' },
-        { '<leader>d', group = '[d]ocument' },
+        { '<leader>d', group = '[d]ebugger' },
         { '<leader>r', group = '[r]ename' },
         { '<leader>s', group = '[s]earch' },
         { '<leader>w', group = '[w]orkspace' },
