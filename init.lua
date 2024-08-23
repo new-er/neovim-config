@@ -107,12 +107,12 @@ vim.keymap.set('n', '<leader>gc', function()
   vim.cmd(command)
 end, { desc = '[c]ommit' })
 vim.keymap.set('n', '<leader>gacp', function()
-  vim.cmd('Git add .')
+  vim.cmd 'Git add .'
   local message = vim.fn.input('message: ', '')
   local command = string.format('Git commit -m "%s"', message)
   vim.cmd(command)
-  vim.cmd('Git push')
-end, { desc = '[p]ush' })
+  vim.cmd 'Git push'
+end, { desc = '.. and [p]ush' })
 
 -- buffer keymaps
 vim.keymap.set('n', '<CTRL>bp', ':bp<CR>', { desc = '[p]revious' })
@@ -369,7 +369,8 @@ require('lazy').setup({
         { '<leader>p', group = '[p]roject' },
         { '<leader>l', group = '[l]SP' },
         { '<leader>g', group = '[g]it' },
-        { '<leader>ga', group = '[g]it [a]dd' },
+        { '<leader>ga', group = '[a]dd' },
+        { '<leader>gac', group = '.. and [c]ommit' },
         { '<leader>t', group = 'nvim-[t]ree' },
       }
     end,
