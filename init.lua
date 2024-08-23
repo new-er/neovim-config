@@ -102,10 +102,9 @@ vim.keymap.set('n', '<leader>ga.', ':Git add .<CR>', { desc = '[.]' })
 vim.keymap.set('n', '<leader>gp', ':Git push<CR>', { desc = '[p]ush' })
 vim.keymap.set('n', '<leader>gl', ':Git pull<CR>', { desc = 'pu[l]' })
 vim.keymap.set('n', '<leader>gc', function()
-  -- Start the Git commit command
-  vim.cmd 'Git commit -m ""'
-  -- Move the cursor back into the quotes
-  vim.api.nvim_feedkeys('i', 'n', true)
+  local message = vim.fn.input('message: ', '', 'file')
+  local command = string.format('Git commit -m "%s"', message)
+  vim.cmd(command)
 end, { desc = '[c]ommit' })
 
 -- buffer keymaps
