@@ -2,7 +2,7 @@ local api = require "nvim-tree.api"
 local Event = api.events.Event
 local currentSize = 30
 api.events.subscribe(Event.Resize, function(size)
-currentSize=size
+  currentSize = size
 end)
 
 return {
@@ -37,11 +37,11 @@ return {
       end
       dap.listeners.before.event_terminated.dapui_config = function()
         dapui.close()
-        vim.cmd(":NvimTreeResize ".. currentSize)
+        vim.cmd(":NvimTreeResize " .. currentSize)
       end
       dap.listeners.before.event_exited.dapui_config = function()
         dapui.close()
-        vim.cmd (":NvimTreeResize "..currentSize)
+        vim.cmd(":NvimTreeResize " .. currentSize)
       end
     end,
   },
@@ -55,5 +55,9 @@ return {
     dependencies = {
       "mfussenegger/nvim-dap",
     },
+  },
+  {
+    "github/copilot.vim",
+    lazy=false,
   },
 }
