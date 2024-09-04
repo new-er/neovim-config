@@ -81,4 +81,14 @@ return {
     },
     -- See Commands section for default commands if you want to lazy load on them
   },
+  {
+    "nvimdev/dashboard-nvim",
+    event = "VimEnter",
+    config = function()
+      require("dashboard").setup {
+        -- config
+      }
+    end,
+    dependencies = { { "nvim-tree/nvim-web-devicons" } },
+  },
 }
