@@ -4,6 +4,7 @@ local currentSize = 30
 api.events.subscribe(Event.Resize, function(size)
   currentSize = size
 end)
+local util = require "lspconfig.util"
 
 return {
   {
