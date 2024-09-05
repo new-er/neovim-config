@@ -18,4 +18,9 @@ map("n", "<leader>gacp", function()
   vim.cmd ":!git add ."
   git_commit()
   vim.cmd ":!git push"
+map("n", "<leader>gcf", function()
+  local path = vim.api.nvim_buf_get_name(0)
+  local cmd = string.format(':!git checkout -- %s', path)
+  vim.cmd(cmd)
+end)
 end, { desc = ".. and [p]ush" })
