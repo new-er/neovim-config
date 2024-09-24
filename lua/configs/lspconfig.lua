@@ -34,3 +34,6 @@ lspconfig.openscad_lsp.setup {
   on_init = nvlsp.on_init,
   capabilities = nvlsp.capabilities,
 }
+
+
+lspconfig.clangd.set{}
