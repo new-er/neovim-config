@@ -34,8 +34,9 @@ lspconfig.openscad_lsp.setup {
   on_init = nvlsp.on_init,
   capabilities = nvlsp.capabilities,
 }
-
-lspconfig.clangd.set{}
+if not lspconfig.clangd == nil then
+  lspconfig.clangd.set {}
+end
 
 lspconfig.omnisharp.setup {
   cmd = { "dotnet", "C:/Program Files/Omnisharp/OmniSharp.dll" },
@@ -80,4 +81,3 @@ lspconfig.omnisharp.setup {
     },
   },
 }
-
