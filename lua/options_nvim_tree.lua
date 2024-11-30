@@ -1,9 +1,12 @@
+local function nvimTreeOnAttach(bufnr)
+  local api = require("nvim-tree.api")
 
-local function open_nvim_tree()
-  require('nvim-tree.api').tree.open()
+  api.config.mappings.default_on_attach(bufnr)
+
+  -- delete keymaps which collide with vim-tmux-navigator
+  vim.keymap.del('n', '<C-h>', { buffer = bufnr })
+  vim.keymap.del('n', '<C-j>', { buffer = bufnr })
+  vim.keymap.del('n', '<C-k>', { buffer = bufnr })
+  vim.keymap.del('n', '<C-l>', { buffer = bufnr })
 end
--- vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
-
-require('nvim-tree').setup({view = {relativenumber = true, number = true,}})
-
-
+require('nvim-tree').setup({ view = { relativenumber = true, number = true, }, on_attach = nvimTreeOnAttach })
