@@ -9,4 +9,4 @@ local function nvimTreeOnAttach(bufnr)
   vim.keymap.del('n', '<C-k>', { buffer = bufnr })
   --vim.keymap.del('n', '<C-l>', { buffer = bufnr })
 end
-require('nvim-tree').setup({ view = { relativenumber = true, number = true, }, on_attach = nvimTreeOnAttach })
+require('nvim-tree').setup({ view = { relativenumber = true, number = true, }, update_focused_file = { enable = true, }, on_attach = nvimTreeOnAttach })
