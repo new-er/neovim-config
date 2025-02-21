@@ -39,7 +39,7 @@ if not lspconfig.clangd == nil then
 end
 
 lspconfig.omnisharp.setup {
-  cmd = { "dotnet", "/usr/bin/omnisharp/OmniSharp.dll" },
+  cmd = { "OmniSharp" },
 
   settings = {
     FormattingOptions = {
