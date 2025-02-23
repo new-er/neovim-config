@@ -136,7 +136,7 @@ return {
   -- vim-tmux-navigator
   {
     'alexghergh/nvim-tmux-navigation',
-    lazy = false;
+    lazy = false,
     config = function()
       local nvim_tmux_nav = require('nvim-tmux-navigation')
 
@@ -150,6 +150,14 @@ return {
       vim.keymap.set('n', "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
       vim.keymap.set('n', "<C-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive)
       vim.keymap.set('n', "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
+    end
+  },
+  -- lazy-lsp --
+  {
+    "dundalek/lazy-lsp.nvim",
+    dependencies = { "neovim/nvim-lspconfig" },
+    config = function()
+      require("lazy-lsp").setup {}
     end
   }
 }

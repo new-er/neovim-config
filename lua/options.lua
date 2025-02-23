@@ -8,4 +8,3 @@ require('options_copilot')
 --if vim.fn.has('win32') then
   --  require('options_powershell')
 --end
-require('options_tabstop')
