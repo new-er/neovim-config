@@ -152,12 +152,7 @@ return {
       vim.keymap.set('n', "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
     end
   },
-  -- lazy-lsp --
-  {
-    "dundalek/lazy-lsp.nvim",
-    dependencies = { "neovim/nvim-lspconfig" },
-    config = function()
-      require("lazy-lsp").setup {}
-    end
-  }
+  -- mason --
+  { "williamboman/mason.nvim" },
+  { "williamboman/mason-lspconfig.nvim" },
 }
